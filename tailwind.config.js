@@ -1,5 +1,6 @@
 import tailwindTypography from '@tailwindcss/typography';
 import daisyui from 'daisyui';
+import { sunset } from 'daisyui/src/theming/themes';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -12,7 +13,14 @@ export default {
 		}
 	},
 	daisyui: {
-		themes: ['sunset']
+		themes: [
+			{
+				sunset: {
+					...sunset,
+					error: '#b91c1c'
+				}
+			}
+		]
 	},
 	plugins: [tailwindTypography, daisyui]
 };
