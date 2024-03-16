@@ -4,7 +4,11 @@ import daisyui from 'daisyui';
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {
+			container: {
+				center: true
+			}
+		}
 	},
 	daisyui: {
 		themes: ['sunset']
