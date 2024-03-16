@@ -1,3 +1,4 @@
+import tailwindTypography from '@tailwindcss/typography';
 import daisyui from 'daisyui';
 
 /** @type {import('tailwindcss').Config} */
@@ -13,5 +14,5 @@ export default {
 	daisyui: {
 		themes: ['sunset']
 	},
-	plugins: [daisyui]
+	plugins: [tailwindTypography, daisyui]
 };
