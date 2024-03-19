@@ -15,9 +15,9 @@
 		await goto(`?${stringifiedQueryParams}`);
 	};
 
-	let selectedCategory = parsedQueryParams.category ?? 'all';
-	let selectedPrice = parsedQueryParams.price ?? 'all';
-	let selectedRating = parsedQueryParams.rating ?? 'all';
+	let selectedCategory = (parsedQueryParams.category ?? 'all') as string;
+	let selectedPrice = (parsedQueryParams.price ?? 'all') as string;
+	let selectedRating = (parsedQueryParams.rating ?? 'all') as string;
 
 	const handleSelectedCategory = async (e: Event) => {
 		const target = e.target as HTMLSelectElement;
