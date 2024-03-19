@@ -20,7 +20,12 @@
 	let selectedPrice = (parsedQueryParams.price ?? 'all') as string;
 	let selectedRating = (parsedQueryParams.rating ?? 'all') as string;
 
-	$: filteredProducts = filterProducts(data.products, selectedCategory, selectedPrice);
+	$: filteredProducts = filterProducts(
+		data.products,
+		selectedCategory,
+		selectedPrice,
+		selectedRating
+	);
 
 	const handleSelectedCategory = async (e: Event) => {
 		const target = e.target as HTMLSelectElement;
