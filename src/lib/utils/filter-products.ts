@@ -18,3 +18,25 @@ export const filterByPriceRange = (products: TProduct[], priceRange: string): TP
 
 	return products.filter((product) => product.price >= min && product.price <= max);
 };
+
+export const filterProducts = (
+	products: TProduct[],
+	category: string,
+	priceRange: string
+): TProduct[] => {
+	if (category === 'all' && priceRange === 'all') {
+		return products;
+	}
+
+	let filteredProducts = products;
+
+	if (category !== 'all') {
+		filteredProducts = filterByCategory(filteredProducts, category);
+	}
+
+	if (priceRange !== 'all') {
+		filteredProducts = filterByPriceRange(filteredProducts, priceRange);
+	}
+
+	return filteredProducts;
+};
