@@ -84,13 +84,7 @@
 
 		<section class="flex flex-col lg:gap-20 gap-10 relative">
 			<!-- filter: category, price range, rating{.count|.rate} -->
-			<aside class="grow flex lg:flex-row flex-col gap-6 justify-between">
-				<div class="prose">
-					<h3 class="font-semibold">
-						<i class="fa-solid fa-sliders"></i>
-						<span>Filter Products</span>
-					</h3>
-				</div>
+			<aside class="grow">
 				<form on:submit|preventDefault class="flex md:flex-row flex-col gap-8 md:w-fit max-w-2xl">
 					<!-- Category -->
 					<div class="form-control gap-2">
