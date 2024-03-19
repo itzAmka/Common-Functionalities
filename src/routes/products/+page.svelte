@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { calculateStarFraction } from '$lib/utils/calculate-star-fraction';
+
 	export let data;
 </script>
 
@@ -72,6 +74,22 @@
 								<img src={product.image} alt={product.title} class="w-full object-cover" />
 							</figure>
 							<div class="card-body">
+								<div class="flex items-center justify-between">
+									<!-- category -->
+									<span class="badge badge-primary">{product.category}</span>
+									<!-- rating -->
+									<div>
+										{#each calculateStarFraction(product.rating.rate) as star}
+											{#if star === 'full'}
+												<i class="fas fa-star text-yellow-400"></i>
+											{:else if star === 'half'}
+												<i class="fas fa-star-half-alt text-yellow-400"></i>
+											{:else}
+												<i class="far fa-star text-yellow-400"></i>
+											{/if}
+										{/each}
+									</div>
+								</div>
 								<h2 class="card-title">{product.title}</h2>
 								<p>
 									{product.description.length > 250
