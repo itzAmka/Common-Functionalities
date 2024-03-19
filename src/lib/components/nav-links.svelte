@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class="flex gap-4 w-fit">
+<div class="flex gap-4 w-fit flex-wrap">
 	<a href="/" class="btn btn-sm {$page.url.pathname === '/' ? 'btn-primary' : 'btn-accent'}">
 		/Home
 	</a>
