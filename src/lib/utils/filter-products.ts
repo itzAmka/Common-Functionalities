@@ -19,6 +19,17 @@ export const filterByPriceRange = (products: TProduct[], priceRange: string): TP
 	return products.filter((product) => product.price >= min && product.price <= max);
 };
 
+export const filterByRateRange = (products: TProduct[], rateRange: string): TProduct[] => {
+	if (rateRange === 'all') {
+		return products;
+	}
+
+	// split the rate range string into an array of two strings, then convert them to numbers
+	const [min, max] = rateRange.split('-').map(Number);
+
+	return products.filter((product) => product.rating.rate >= min && product.rating.rate <= max);
+};
+
 export const filterProducts = (
 	products: TProduct[],
 	category: string,
