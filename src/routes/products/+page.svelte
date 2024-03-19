@@ -45,6 +45,20 @@
 
 		await updateUrl();
 	};
+
+	const resetFilters = async () => {
+		selectedCategory = 'all';
+		selectedPrice = 'all';
+		selectedRating = 'all';
+
+		parsedQueryParams.category = selectedCategory;
+		parsedQueryParams.price = selectedPrice;
+		parsedQueryParams.rating = selectedRating;
+
+		console.log({ parsedQueryParams });
+
+		await updateUrl();
+	};
 </script>
 
 <svelte:head>
@@ -123,7 +137,7 @@
 						</label>
 					</div>
 
-					<button type="reset" class="btn btn-error">Reset Filters</button>
+					<button type="reset" class="btn btn-error" on:click={resetFilters}>Reset Filters</button>
 				</form>
 			</aside>
 			<!-- products list -->
