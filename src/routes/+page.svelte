@@ -15,8 +15,8 @@
 
 		<div class="flex gap-4 w-fit">
 			<a href="/filtering" class="btn btn-sm btn-primary">/Filtering</a>
-			<a href="/searching" class="btn btn-sm btn-primary">/Searching</a>
 			<a href="/sorting" class="btn btn-sm btn-primary">/Sorting</a>
+			<a href="/searching" class="btn btn-sm btn-primary">/Searching</a>
 		</div>
 	</div>
 </section>
