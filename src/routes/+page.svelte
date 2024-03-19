@@ -1,3 +1,7 @@
+<script lang="ts">
+	import NavLinks from '$lib/components/nav-links.svelte';
+</script>
+
 <svelte:head>
 	<title>Home | Filtering</title>
 </svelte:head>
@@ -13,10 +17,6 @@
 			</p>
 		</div>
 
-		<div class="flex gap-4 w-fit">
-			<a href="/filtering" class="btn btn-sm btn-primary">/Filtering</a>
-			<a href="/sorting" class="btn btn-sm btn-primary">/Sorting</a>
-			<a href="/searching" class="btn btn-sm btn-primary">/Searching</a>
-		</div>
+		<NavLinks />
 	</div>
 </section>

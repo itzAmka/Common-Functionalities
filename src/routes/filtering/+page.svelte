@@ -5,6 +5,7 @@
 
 	import { calculateStarFraction } from '$lib/utils/calculate-star-fraction';
 	import { filterProducts } from '$lib/utils/filter-products';
+	import NavLinks from '$lib/components/nav-links.svelte';
 
 	export let data;
 
@@ -78,11 +79,7 @@
 			<p>Use the filters to find the product you are looking for.</p>
 
 			<!-- links -->
-			<div class="flex gap-4 w-fit">
-				<a href="/" class="btn btn-sm btn-accent">/Home</a>
-				<a href="/sorting" class="btn btn-sm btn-accent">/Sorting</a>
-				<a href="/searching" class="btn btn-sm btn-accent">/Searching</a>
-			</div>
+			<NavLinks />
 		</section>
 
 		<section class="flex flex-col lg:gap-20 gap-10 relative">
