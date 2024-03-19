@@ -28,11 +28,15 @@
 					<!-- Category -->
 					<div class="form-control gap-2">
 						<label for="category">
-							<select id="category" name="category" class="select select-bordered text-base w-full">
+							<select
+								id="category"
+								name="category"
+								class="select select-bordered text-base w-full capitalize"
+							>
 								<option value="all">All Categories</option>
-								<option value="electronics">Electronics</option>
-								<option value="clothing">Clothing</option>
-								<option value="home">Home</option>
+								{#each data.productCategories as category}
+									<option value={category}>{category}</option>
+								{/each}
 							</select>
 						</label>
 					</div>
