@@ -63,8 +63,6 @@
 		parsedQueryParams.price = selectedPrice;
 		parsedQueryParams.rating = selectedRating;
 
-		console.log({ parsedQueryParams });
-
 		await updateUrl();
 	};
 </script>
