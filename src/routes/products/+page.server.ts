@@ -2,15 +2,22 @@ import type { PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
 export const load = (async ({ fetch }) => {
-	const res = await fetch('https://fakestoreapi.com/products');
+	const productsRes = await fetch('https://fakestoreapi.com/products');
+	const productCategoriesRes = await fetch('https://fakestoreapi.com/products/categories');
 
-	if (!res.ok) {
-		error(res.status, 'Failed to load products');
+	if (!productsRes.ok) {
+		error(productsRes.status, 'Failed to load products');
 	}
 
-	const products = await res.json();
+	if (!productCategoriesRes.ok) {
+		error(productCategoriesRes.status, 'Failed to load product categories');
+	}
+
+	const products = await productsRes.json();
+	const productCategories = await productCategoriesRes.json();
 
 	return {
-		products
+		products,
+		productCategories
 	};
 }) satisfies PageServerLoad;
