@@ -68,7 +68,7 @@
 </script>
 
 <svelte:head>
-	<title>Products | Filtering</title>
+	<title>Filtering Functionality</title>
 </svelte:head>
 
 <section>
