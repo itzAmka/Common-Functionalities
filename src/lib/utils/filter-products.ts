@@ -33,9 +33,10 @@ export const filterByRateRange = (products: TProduct[], rateRange: string): TPro
 export const filterProducts = (
 	products: TProduct[],
 	category: string,
-	priceRange: string
+	priceRange: string,
+	rateRange: string
 ): TProduct[] => {
-	if (category === 'all' && priceRange === 'all') {
+	if (category === 'all' && priceRange === 'all' && rateRange === 'all') {
 		return products;
 	}
 
@@ -47,6 +48,10 @@ export const filterProducts = (
 
 	if (priceRange !== 'all') {
 		filteredProducts = filterByPriceRange(filteredProducts, priceRange);
+	}
+
+	if (rateRange !== 'all') {
+		filteredProducts = filterByRateRange(filteredProducts, rateRange);
 	}
 
 	return filteredProducts;
