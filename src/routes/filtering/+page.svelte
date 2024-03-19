@@ -153,41 +153,65 @@
 			<!-- products list -->
 			<article class="grow-0 flex flex-col gap-8 w-full">
 				<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full gap-y-10">
-					{#each filteredProducts as product}
-						<div class="card max-w-md bg-base-100 shadow-md shadow-gray-950">
-							<figure class="h-72">
-								<img src={product.image} alt={product.title} class="w-full object-cover" />
-							</figure>
-							<div class="card-body">
-								<div class="flex items-center justify-between">
-									<!-- category -->
-									<span class="badge badge-primary">{product.category}</span>
-									<!-- rating -->
-									<div>
-										{#each calculateStarFraction(product.rating.rate) as star}
-											{#if star === 'full'}
-												<i class="fas fa-star text-yellow-400"></i>
-											{:else if star === 'half'}
-												<i class="fas fa-star-half-alt text-yellow-400"></i>
-											{:else}
-												<i class="far fa-star text-yellow-400"></i>
-											{/if}
-										{/each}
+					{#if filteredProducts.length === 0}
+						<div class="flex flex-col gap-4">
+							<div class="prose">
+								<h2 class="text-warning">No products found</h2>
+								<p>
+									We couldn't find any products that match your search. Please try again with
+									different filters.
+								</p>
+							</div>
+							<!-- svg -->
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-24 w-24 text-warning"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 0a10 10 0 0 0-7.07 2.93A10 10 0 0 0 0 10a10 10 0 0 0 2.93 7.07A10 10 0 0 0 10 20a10 10 0 0 0 7.07-2.93A10 10 0 0 0 20 10a10 10 0 0 0-2.93-7.07A10 10 0 0 0 10 0zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a6 6 0 0 0-4.24 10.24L10 14.46l4.24-4.22A6 6 0 0 0 10 4z"
+								/>
+							</svg>
+						</div>
+					{:else}
+						{#each filteredProducts as product}
+							<div class="card max-w-md bg-base-100 shadow-md shadow-gray-950">
+								<figure class="h-72">
+									<img src={product.image} alt={product.title} class="w-full object-cover" />
+								</figure>
+								<div class="card-body">
+									<div class="flex items-center justify-between">
+										<!-- category -->
+										<span class="badge badge-primary">{product.category}</span>
+										<!-- rating -->
+										<div>
+											{#each calculateStarFraction(product.rating.rate) as star}
+												{#if star === 'full'}
+													<i class="fas fa-star text-yellow-400"></i>
+												{:else if star === 'half'}
+													<i class="fas fa-star-half-alt text-yellow-400"></i>
+												{:else}
+													<i class="far fa-star text-yellow-400"></i>
+												{/if}
+											{/each}
+										</div>
+									</div>
+									<h2 class="card-title">{product.title}</h2>
+									<p>
+										{product.description.length > 250
+											? product.description.slice(0, 250) + '...'
+											: product.description + '.'}
+									</p>
+									<div class="card-actions justify-between items-center">
+										<p class="text-xl font-bold text-accent">${product.price}</p>
+										<button class="btn btn-primary">Buy Now</button>
 									</div>
 								</div>
-								<h2 class="card-title">{product.title}</h2>
-								<p>
-									{product.description.length > 250
-										? product.description.slice(0, 250) + '...'
-										: product.description + '.'}
-								</p>
-								<div class="card-actions justify-between items-center">
-									<p class="text-xl font-bold text-accent">${product.price}</p>
-									<button class="btn btn-primary">Buy Now</button>
-								</div>
 							</div>
-						</div>
-					{/each}
+						{/each}
+					{/if}
 				</div>
 			</article>
 		</section>
