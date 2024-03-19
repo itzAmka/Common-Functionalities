@@ -8,7 +8,7 @@ export const filterByCategory = (products: TProduct[], category: string): TProdu
 	return products.filter((product) => product.category.toLowerCase() === category.toLowerCase());
 };
 
-export const filterByPrice = (products: TProduct[], priceRange: string): TProduct[] => {
+export const filterByPriceRange = (products: TProduct[], priceRange: string): TProduct[] => {
 	if (priceRange === 'all') {
 		return products;
 	}
