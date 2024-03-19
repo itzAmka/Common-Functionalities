@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 
 	import { calculateStarFraction } from '$lib/utils/calculate-star-fraction';
+	import { filterProducts } from '$lib/utils/filter-products';
 
 	export let data;
 
@@ -18,6 +19,8 @@
 	let selectedCategory = (parsedQueryParams.category ?? 'all') as string;
 	let selectedPrice = (parsedQueryParams.price ?? 'all') as string;
 	let selectedRating = (parsedQueryParams.rating ?? 'all') as string;
+
+	$: filteredProducts = filterProducts(data.products, selectedCategory, selectedPrice);
 
 	const handleSelectedCategory = async (e: Event) => {
 		const target = e.target as HTMLSelectElement;
@@ -143,7 +146,7 @@
 			<!-- products list -->
 			<article class="grow-0 flex flex-col gap-8 w-full">
 				<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full gap-y-10">
-					{#each data.products as product}
+					{#each filteredProducts as product}
 						<div class="card max-w-md bg-base-100 shadow-md shadow-gray-950">
 							<figure class="h-72">
 								<img src={product.image} alt={product.title} class="w-full object-cover" />
