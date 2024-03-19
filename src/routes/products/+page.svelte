@@ -171,7 +171,8 @@
 										? product.description.slice(0, 250) + '...'
 										: product.description + '.'}
 								</p>
-								<div class="card-actions justify-end">
+								<div class="card-actions justify-between items-center">
+									<p class="text-xl font-bold text-accent">${product.price}</p>
 									<button class="btn btn-primary">Buy Now</button>
 								</div>
 							</div>
