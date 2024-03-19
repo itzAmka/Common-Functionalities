@@ -1,4 +1,5 @@
 import type { PageServerLoad } from './$types';
+import type { TProduct } from '$lib/types/products';
 import { error } from '@sveltejs/kit';
 
 export const load = (async ({ fetch }) => {
@@ -17,7 +18,7 @@ export const load = (async ({ fetch }) => {
 	const productCategories = await productCategoriesRes.json();
 
 	return {
-		products,
+		products: products as TProduct[],
 		productCategories
 	};
 }) satisfies PageServerLoad;
