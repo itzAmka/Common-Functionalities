@@ -1,7 +1,31 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import queryString from 'query-string';
+
 	import { calculateStarFraction } from '$lib/utils/calculate-star-fraction';
 
 	export let data;
+
+	const parsedQueryParams = queryString.parse($page.url.search);
+
+	let selectedCategory = parsedQueryParams.category ?? 'all';
+	let selectedPrice = parsedQueryParams.price ?? 'all';
+	let selectedRating = parsedQueryParams.rating ?? 'all';
+
+	const handleSelectedCategory = async (e: Event) => {
+		const target = e.target as HTMLSelectElement;
+		selectedCategory = target.value;
+	};
+
+	const handleSelectedPrice = async (e: Event) => {
+		const target = e.target as HTMLSelectElement;
+		selectedPrice = target.value;
+	};
+
+	const handleSelectedRating = async (e: Event) => {
+		const target = e.target as HTMLSelectElement;
+		selectedRating = target.value;
+	};
 </script>
 
 <svelte:head>
@@ -32,6 +56,8 @@
 								id="category"
 								name="category"
 								class="select select-bordered text-base w-full capitalize"
+								bind:value={selectedCategory}
+								on:change={handleSelectedCategory}
 							>
 								<option value="all">All Categories</option>
 								{#each data.productCategories as category}
@@ -44,7 +70,13 @@
 					<!-- price range -->
 					<div class="form-control">
 						<label for="price">
-							<select id="price" name="price" class="select select-bordered text-base w-full">
+							<select
+								id="price"
+								name="price"
+								class="select select-bordered text-base w-full"
+								bind:value={selectedPrice}
+								on:change={handleSelectedPrice}
+							>
 								<option value="all">All Prices</option>
 								<option value="0-100">$0 - $100</option>
 								<option value="100-500">$100 - $500</option>
@@ -56,7 +88,13 @@
 					<!-- rating: 1.0 - 5.0 -->
 					<div class="form-control">
 						<label for="rating">
-							<select id="rating" name="rating" class="select select-bordered text-base w-full">
+							<select
+								id="rating"
+								name="rating"
+								class="select select-bordered text-base w-full"
+								bind:value={selectedRating}
+								on:change={handleSelectedRating}
+							>
 								<option value="all">All Ratings</option>
 								<option value="1-2">1.0 - 2.0 ⭐</option>
 								<option value="2-3">2.0 - 3.0 ⭐</option>
