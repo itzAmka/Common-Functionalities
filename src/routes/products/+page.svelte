@@ -1,12 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import queryString from 'query-string';
+	import { goto } from '$app/navigation';
 
 	import { calculateStarFraction } from '$lib/utils/calculate-star-fraction';
 
 	export let data;
 
 	const parsedQueryParams = queryString.parse($page.url.search);
+	let stringifiedQueryParams = queryString.stringify(parsedQueryParams);
+
+	const updateUrl = async () => {
+		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
+		await goto(`?${stringifiedQueryParams}`);
+	};
 
 	let selectedCategory = parsedQueryParams.category ?? 'all';
 	let selectedPrice = parsedQueryParams.price ?? 'all';
@@ -15,16 +22,28 @@
 	const handleSelectedCategory = async (e: Event) => {
 		const target = e.target as HTMLSelectElement;
 		selectedCategory = target.value;
+
+		parsedQueryParams.category = selectedCategory;
+
+		await updateUrl();
 	};
 
 	const handleSelectedPrice = async (e: Event) => {
 		const target = e.target as HTMLSelectElement;
 		selectedPrice = target.value;
+
+		parsedQueryParams.price = selectedPrice;
+
+		await updateUrl();
 	};
 
 	const handleSelectedRating = async (e: Event) => {
 		const target = e.target as HTMLSelectElement;
 		selectedRating = target.value;
+
+		parsedQueryParams.rating = selectedRating;
+
+		await updateUrl();
 	};
 </script>
 
