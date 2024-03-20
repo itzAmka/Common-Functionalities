@@ -1,7 +1,38 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import queryString from 'query-string';
+	import { goto } from '$app/navigation';
+
 	import NavLinks from '$lib/components/nav-links.svelte';
+	import { sortPosts } from '$lib/utils/sort-posts';
 
 	export let data;
+
+	const parsedQueryParams = queryString.parse($page.url.search);
+	let stringifiedQueryParams = queryString.stringify(parsedQueryParams);
+
+	const updateUrl = async () => {
+		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
+		await goto(`?${stringifiedQueryParams}`);
+	};
+
+	let date = (parsedQueryParams.date ?? 'asc') as 'asc' | 'desc';
+
+	$: sortedPosts = sortPosts(data.posts, date);
+
+	const handleSortByDate = async () => {
+		date = date === 'asc' ? 'desc' : 'asc';
+		parsedQueryParams.date = date;
+
+		await updateUrl();
+	};
+
+	const resetFilters = async () => {
+		date = 'asc';
+		parsedQueryParams.date = date;
+
+		await updateUrl();
+	};
 
 	const formatDate = (date: string) => {
 		const dateFormatter = new Intl.DateTimeFormat(undefined, {
@@ -28,8 +59,27 @@
 			<NavLinks />
 		</section>
 
+		<!-- sorting options -->
+		<section class="flex flex-col gap-4">
+			<h2 class="text-primary">Sort by</h2>
+			<div class="flex gap-2 w-fit">
+				<!-- likes desc -->
+				<button class="btn btn-neutral" on:click={handleSortByDate}>
+					{#if date === 'asc'}
+						<i class="fa-solid fa-arrow-up-wide-short"></i>
+					{:else}
+						<i class="fa-solid fa-arrow-down-wide-short"></i>
+					{/if}
+					<span>Date</span>
+				</button>
+
+				<!-- reset filters -->
+				<button class="btn btn-error" on:click={resetFilters}>Reset Filters</button>
+			</div>
+		</section>
+
 		<section>
-			{#if data.posts.length === 0}
+			{#if sortedPosts.length === 0}
 				<div class="flex flex-col gap-4">
 					<div class="prose">
 						<h2 class="text-warning">No Posts found</h2>
@@ -50,7 +100,7 @@
 				</div>
 			{:else}
 				<div class="grid grid-cols-1 gap-x-6 gap-y-16 xl:grid-cols-3 md:grid-cols-2">
-					{#each data.posts as post}
+					{#each sortedPosts as post}
 						<!-- post card -->
 						<article
 							class="card w-full h-fit max-w-md bg-base-300 shadow-lg shadow-black rounded-md"
