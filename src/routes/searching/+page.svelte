@@ -46,7 +46,7 @@
 			<section>
 				<form class="flex items-center justify-end">
 					<input
-						type="text"
+						type="search"
 						class="input focus:border-none input-accent focus:outline-primary max-w-xl w-full"
 						placeholder="Search"
 						bind:value={query}
