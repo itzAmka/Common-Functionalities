@@ -3,13 +3,16 @@
 	import queryString from 'query-string';
 
 	import NavLinks from '$lib/components/nav-links.svelte';
+	import { searchUsers } from '$lib/utils/search-users.js';
 
 	export let data;
 
 	const parsedQueryParams = queryString.parse($page.url.search);
 	let stringifiedQueryParams = queryString.stringify(parsedQueryParams);
 
-	let query = parsedQueryParams.query ?? '';
+	let query = (parsedQueryParams.query ?? '') as string;
+
+	$: filteredUsers = searchUsers(data.users, query);
 
 	const updateUrl = () => {
 		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
@@ -71,12 +74,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							{#if data.users.length === 0}
+							{#if filteredUsers.length === 0}
 								<tr>
 									<td colSpan="5" class="text-center"> No data found </td>
 								</tr>
 							{:else}
-								{#each data.users as user}
+								{#each filteredUsers as { user }}
 									<tr>
 										<td>
 											<div class="flex items-center gap-3">
