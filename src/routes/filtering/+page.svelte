@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import queryString from 'query-string';
-	import { goto } from '$app/navigation';
 
 	import { calculateStarFraction } from '$lib/utils/calculate-star-fraction';
 	import { filterProducts } from '$lib/utils/filter-products';
@@ -14,7 +13,7 @@
 
 	const updateUrl = async () => {
 		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
-		await goto(`?${stringifiedQueryParams}`);
+		history.pushState({}, '', `?${stringifiedQueryParams}`);
 	};
 
 	let selectedCategory = (parsedQueryParams.category ?? 'all') as string;
@@ -34,7 +33,7 @@
 
 		parsedQueryParams.category = selectedCategory;
 
-		await updateUrl();
+		updateUrl();
 	};
 
 	const handleSelectedPrice = async (e: Event) => {
@@ -43,7 +42,7 @@
 
 		parsedQueryParams.price = selectedPrice;
 
-		await updateUrl();
+		updateUrl();
 	};
 
 	const handleSelectedRating = async (e: Event) => {
@@ -52,7 +51,7 @@
 
 		parsedQueryParams.rating = selectedRating;
 
-		await updateUrl();
+		updateUrl();
 	};
 
 	const resetFilters = async () => {
@@ -64,7 +63,7 @@
 		parsedQueryParams.price = selectedPrice;
 		parsedQueryParams.rating = selectedRating;
 
-		await updateUrl();
+		updateUrl();
 	};
 </script>
 

@@ -11,6 +11,11 @@
 
 	let query = parsedQueryParams.query ?? '';
 
+	const updateUrl = () => {
+		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
+		history.pushState({}, '', `?${stringifiedQueryParams}`);
+	};
+
 	const handleSearch = async (e: Event) => {
 		const target = e.target as HTMLInputElement;
 
@@ -18,9 +23,7 @@
 
 		parsedQueryParams.query = query;
 
-		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
-
-		history.pushState({}, '', `?${stringifiedQueryParams}`);
+		updateUrl();
 	};
 </script>
 

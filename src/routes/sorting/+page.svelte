@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import queryString from 'query-string';
-	import { goto } from '$app/navigation';
 
 	import NavLinks from '$lib/components/nav-links.svelte';
 	import { sortPosts } from '$lib/utils/sort-posts';
@@ -11,9 +10,9 @@
 	const parsedQueryParams = queryString.parse($page.url.search);
 	let stringifiedQueryParams = queryString.stringify(parsedQueryParams);
 
-	const updateUrl = async () => {
+	const updateUrl = () => {
 		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
-		await goto(`?${stringifiedQueryParams}`);
+		history.pushState({}, '', `?${stringifiedQueryParams}`);
 	};
 
 	let date = (parsedQueryParams.date ?? 'asc') as 'asc' | 'desc';
@@ -24,14 +23,14 @@
 		date = date === 'asc' ? 'desc' : 'asc';
 		parsedQueryParams.date = date;
 
-		await updateUrl();
+		updateUrl();
 	};
 
 	const resetFilters = async () => {
 		date = 'asc';
 		parsedQueryParams.date = date;
 
-		await updateUrl();
+		updateUrl();
 	};
 
 	const formatDate = (date: string) => {
