@@ -1,7 +1,27 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import queryString from 'query-string';
+
 	import NavLinks from '$lib/components/nav-links.svelte';
 
 	export let data;
+
+	const parsedQueryParams = queryString.parse($page.url.search);
+	let stringifiedQueryParams = queryString.stringify(parsedQueryParams);
+
+	let query = parsedQueryParams.query ?? '';
+
+	const handleSearch = async (e: Event) => {
+		const target = e.target as HTMLInputElement;
+
+		query = target.value;
+
+		parsedQueryParams.query = query;
+
+		stringifiedQueryParams = queryString.stringify(parsedQueryParams);
+
+		history.pushState({}, '', `?${stringifiedQueryParams}`);
+	};
 </script>
 
 <svelte:head>
@@ -26,6 +46,8 @@
 						type="text"
 						class="input focus:border-none input-accent focus:outline-primary max-w-xl w-full"
 						placeholder="Search"
+						bind:value={query}
+						on:keyup={handleSearch}
 					/>
 				</form>
 			</section>
