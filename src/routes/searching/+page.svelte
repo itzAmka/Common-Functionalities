@@ -75,8 +75,32 @@
 						</thead>
 						<tbody>
 							{#if filteredUsers.length === 0}
-								<tr>
-									<td colSpan="5" class="text-center"> No data found </td>
+								<tr class="w-full">
+									<td colSpan="5">
+										<div class="flex py-16 flex-col items-center">
+											<div class="flex flex-col gap-4">
+												<div class="prose">
+													<h2 class="text-warning">No data found</h2>
+													<p>
+														We couldn't find any user data that matches your search. <br /> Please try
+														again.
+													</p>
+												</div>
+												<!-- svg -->
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="h-24 w-24 text-warning"
+													viewBox="0 0 20 20"
+													fill="currentColor"
+												>
+													<path
+														fill-rule="evenodd"
+														d="M10 0a10 10 0 0 0-7.07 2.93A10 10 0 0 0 0 10a10 10 0 0 0 2.93 7.07A10 10 0 0 0 10 20a10 10 0 0 0 7.07-2.93A10 10 0 0 0 20 10a10 10 0 0 0-2.93-7.07A10 10 0 0 0 10 0zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a6 6 0 0 0-4.24 10.24L10 14.46l4.24-4.22A6 6 0 0 0 10 4z"
+													/>
+												</svg>
+											</div>
+										</div>
+									</td>
 								</tr>
 							{:else}
 								{#each filteredUsers as { user }}
