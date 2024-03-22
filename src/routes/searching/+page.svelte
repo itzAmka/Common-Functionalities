@@ -77,7 +77,7 @@
 					<input
 						type="search"
 						class="input focus:border-none input-accent focus:outline-primary max-w-xl w-full"
-						placeholder="Search"
+						placeholder="Search users by name, email, phone, etc."
 						bind:value={query}
 						on:keyup={handleSearch}
 					/>
