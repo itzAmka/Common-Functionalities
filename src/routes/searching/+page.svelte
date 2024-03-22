@@ -131,7 +131,7 @@
 							{:else}
 								{#each filteredUsers as { user }}
 									<tr>
-										<td>
+										<td class="text-nowrap">
 											<div class="flex items-center gap-3">
 												<div class="avatar">
 													<div class="mask mask-squircle w-12 h-12">
@@ -144,13 +144,13 @@
 												</div>
 											</div>
 										</td>
-										<td class="flex flex-col">
+										<td class="flex flex-col text-nowrap">
 											<span>{user.company.title}</span>
 											<span>at <span class="font-semibold">{user.company.name}</span></span>
 										</td>
-										<td>{user.email}</td>
-										<td>{user.phone}</td>
-										<th>{user.age} years old</th>
+										<td class="text-nowrap">{user.email}</td>
+										<td class="text-nowrap">{user.phone}</td>
+										<th class="text-nowrap">{user.age} years old</th>
 									</tr>
 								{/each}
 							{/if}
