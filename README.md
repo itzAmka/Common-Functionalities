@@ -1,18 +1,41 @@
-# Filtering Project - Pure Filter Functionality no other functionalities involved in
+# Common Functionalities
 
-In this project I'm going to implement a simple filter functionality using Svelte and SvelteKit. The data will be fetched from a [Fake Sstore API](https://fakestoreapi.com/).
+Here are some common functionalities that you can use to filter, search, and sort your data.
 
-## How does it work?
+## Filter
 
-The end user will have a select dropdown to choose the filtering criteria.
+For filtering data, I have used the products data from the [Fake Store API](https://fakestoreapi.com/). The functionality I implemented is to filter the data based on the category, price range, and rating range of the products.
 
-options are:
+## Sorting
 
-- All
-- Category (e.g. Electronics, or Jewelery)
-- Price Range (e.g. $0 - $50, or $50 - $100)
-- Rating (e.g. 1 star, 2 stars, 3 stars, 4 stars, 5 stars)
+In sorting, the posts data comes from the [Dummy.io API](https://dummyapi.io/). I have implemented sorting based on the date the post was published.
 
-## Bonus Features
+## Search
 
-The user can select one or more options from the dropdown. The products will be filtered based on the selected options.
+For searching, I have used the users data from the [Dummy JSON API](https://dummyjson.com/). The search functionality is implemented based on all the fields of the user data displayed in the table. A bonus feature I implemented is to include pagination for the table data.
+
+## How to run the project
+
+This project is built using SvelteKit. To run the project, clone the repository first:
+
+```bash
+git clone TODO_REPO_LINK
+```
+
+install the dependencies:
+
+```bash
+pnpm install
+```
+
+Run the project:
+
+```bash
+pnpm dev
+```
+
+The project will be running on `http://localhost:5173`.
+
+Thank you for checking out this project. If you have any questions or suggestions, please do not hesitate to contact me via the [contact form](https://amka.dev/#contact) on my portfolio website. Your feedback is greatly appreciated.
+
+[//]: # 'README.md ends here'
