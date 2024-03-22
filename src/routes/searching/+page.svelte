@@ -4,6 +4,7 @@
 
 	import NavLinks from '$lib/components/nav-links.svelte';
 	import { searchUsers } from '$lib/utils/search-users.js';
+	import { goto } from '$app/navigation';
 
 	export let data;
 
@@ -11,6 +12,7 @@
 	let stringifiedQueryParams = queryString.stringify(parsedQueryParams);
 
 	let query = (parsedQueryParams.query ?? '') as string;
+	let pageNumber = (parsedQueryParams.pageNumber ?? '') as string;
 
 	$: filteredUsers = searchUsers(data.users, query);
 
@@ -27,6 +29,30 @@
 		parsedQueryParams.query = query;
 
 		updateUrl();
+	};
+
+	const handlePrevPage = async () => {
+		if (Number(pageNumber) <= 1) return;
+
+		pageNumber = String(Number(pageNumber) - 1);
+
+		parsedQueryParams.pageNumber = pageNumber;
+
+		updateUrl();
+
+		await goto($page.url.pathname + `?${stringifiedQueryParams}`);
+	};
+
+	const handleNextPage = async () => {
+		if (Number(pageNumber) >= data.pagination.totalPages) return;
+
+		pageNumber = String(Number(pageNumber) + 1);
+
+		parsedQueryParams.pageNumber = pageNumber;
+
+		updateUrl();
+
+		await goto($page.url.pathname + `?${stringifiedQueryParams}`);
 	};
 </script>
 
@@ -144,7 +170,7 @@
 
 				<!-- pagination -->
 				<div class="flex items-center justify-center mt-4">
-					<button class="btn btn-outline rounded-tr-none rounded-br-none">
+					<button class="btn btn-outline rounded-tr-none rounded-br-none" on:click={handlePrevPage}>
 						<i class="fa-solid fa-circle-chevron-left"></i>
 						<span>Prev</span>
 					</button>
@@ -155,7 +181,11 @@
 						</div>
 					</button>
 
-					<button class="btn btn-outline rounded-tl-none rounded-bl-none">
+					<button
+						class="btn btn-outline rounded-tl-none rounded-bl-none"
+						disabled={data.pagination.totalPages === data.pagination.pageNumber}
+						on:click={handleNextPage}
+					>
 						<span>Next</span>
 						<i class="fa-solid fa-circle-chevron-right"></i>
 					</button>
