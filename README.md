@@ -28,6 +28,12 @@ install the dependencies:
 pnpm install
 ```
 
+Make sure you provide `DUMMY_API_APP_ID` in .env file. You can get the app id from [https://dummyapi.io/account](https://dummyapi.io/account)
+
+```bash
+DUMMY_API_APP_ID=YOUR_DUMMY_API_APP_ID
+```
+
 Run the project:
 
 ```bash
