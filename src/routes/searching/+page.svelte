@@ -170,14 +170,20 @@
 
 				<!-- pagination -->
 				<div class="flex items-center justify-center mt-4">
-					<button class="btn btn-outline rounded-tr-none rounded-br-none" on:click={handlePrevPage}>
+					<button
+						class="btn btn-outline rounded-tr-none rounded-br-none"
+						disabled={data.pagination.pageNumber === 1}
+						on:click={handlePrevPage}
+					>
 						<i class="fa-solid fa-circle-chevron-left"></i>
 						<span>Prev</span>
 					</button>
 
 					<button class="btn rounded-none">
 						<div>
-							<span class="text-primary">page 1</span> of <span class="text-primary">100</span>
+							<span class="text-primary">page {data.pagination.pageNumber}</span>
+							<span>of</span>
+							<span class="text-primary">{data.pagination.totalPages}</span>
 						</div>
 					</button>
 
