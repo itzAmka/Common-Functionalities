@@ -19,7 +19,7 @@ For searching, I have used the users data from the [Dummy JSON API](https://dumm
 This project is built using SvelteKit. To run the project, clone the repository first:
 
 ```bash
-git clone TODO_REPO_LINK
+git clone https://github.com/itzAmka/Common-Functionalities.git
 ```
 
 install the dependencies:
